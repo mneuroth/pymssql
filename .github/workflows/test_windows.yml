@@ -27,10 +27,10 @@ jobs:
       
     steps:
     - name: Checkout code
-      if: contains(github.ref, 'rc')
+      if: contains(github.ref, 'v')
       uses: actions/checkout@v2
     - name: Create Release
-      if: contains(github.ref, 'rc')
+      if: contains(github.ref, 'v')
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -41,10 +41,10 @@ jobs:
         draft: false
         prerelease: false
     - name: Output Release URL File
-      if: contains(github.ref, 'rc')
+      if: contains(github.ref, 'v')
       run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
     - name: Save Release URL File for publish
-      if: contains(github.ref, 'rc')
+      if: contains(github.ref, 'v')
       uses: actions/upload-artifact@v1
       with:
         name: release_url
@@ -138,7 +138,7 @@ jobs:
         # twine upload --skip-existing -u __token__ -p ${{secrets.PYMSSQL_TEST_PYPI_TOKEN}} --repository-url=https://test.pypi.org/legacy/ dist/*.whl
 
     - name: Upload zip Release Asset
-      if: contains(github.ref, 'rc')
+      if: contains(github.ref, 'v')
       id: upload-zip-release-asset
       uses: actions/upload-release-asset@v1
       env:

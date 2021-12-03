@@ -95,7 +95,10 @@ jobs:
         dir dev
         dir dist
         dir build
-        dir /s *
+        dir build/bdist.win-amd64
+        dir build/lib.win-amd64-3.7
+        dir build/temp.win-amd64-3.7
+        #dir /s *
         pip install pymssql --no-index -f dist
         python -c "import pymssql; print(pymssql.version_info())"
 

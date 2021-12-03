@@ -92,7 +92,7 @@ jobs:
         dir dev
         dir dist
         dir build
-        dir
+        dir * /s
         pip install pymssql --no-index -f dist
         python -c "import pymssql; print(pymssql.version_info())"
 

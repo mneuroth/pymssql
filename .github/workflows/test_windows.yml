@@ -58,9 +58,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-            python-version: [3.7, 3.8, 3.9]
+            python-version: [3.7]
             os: [windows-latest]
-            python-architecture: [x86, x64]
+            python-architecture: [x64]
+            #python-version: [3.7, 3.8, 3.9]
+            #os: [windows-latest]
+            #python-architecture: [x86, x64]
 
     steps:
 
@@ -92,7 +95,7 @@ jobs:
         dir dev
         dir dist
         dir build
-        dir * /s
+        dir /s *
         pip install pymssql --no-index -f dist
         python -c "import pymssql; print(pymssql.version_info())"
 

@@ -886,11 +886,14 @@ cdef class MSSQLConnection:
         elif dbtype in (SQLDATETIM4, SQLDATETIME2):
             dbconvert(self.dbproc, dbtype, data, -1, SQLDATETIME,
                 <BYTE *>&dt, -1)
-			IF PYMSSQL_DEBUG == 1:
-				sys.stderr.write("convert_db_value data: 0=%d;1=%d;2=%d;3=%d;4=%d;5=%d;6=%d;7=%d;8=%d;9=%d;10=%d;11=%d;12=%d;13=%d;14=%d;15=%d\n" % (int(<int>(<DBTINYINT *>data)[0]),int(<int>(<DBTINYINT *>data)[1]),int(<int>(<DBTINYINT *>data)[2]),int(<int>(<DBTINYINT *>data)[3]),int(<int>(<DBTINYINT *>data)[4]),int(<int>(<DBTINYINT *>data)[5]),int(<int>(<DBTINYINT *>data)[6]),int(<int>(<DBTINYINT *>data)[7]),int(<int>(<DBTINYINT *>data)[8]),int(<int>(<DBTINYINT *>data)[9]),int(<int>(<DBTINYINT *>data)[10]),int(<int>(<DBTINYINT *>data)[11]),int(<int>(<DBTINYINT *>data)[12]),int(<int>(<DBTINYINT *>data)[13]),int(<int>(<DBTINYINT *>data)[14]),int(<int>(<DBTINYINT *>data)[15])))
+            IF PYMSSQL_DEBUG == 1:
+                sys.stderr.write("convert_db_value data: 0=%d;1=%d;2=%d;3=%d;4=%d;5=%d;6=%d;7=%d;8=%d;9=%d;10=%d;11=%d;12=%d;13=%d;14=%d;15=%d\n" % (int(<int>(<DBTINYINT *>data)[0]),int(<int>(<DBTINYINT *>data)[1]),int(<int>(<DBTINYINT *>data)[2]),int(<int>(<DBTINYINT *>data)[3]),int(<int>(<DBTINYINT *>data)[4]),int(<int>(<DBTINYINT *>data)[5]),int(<int>(<DBTINYINT *>data)[6]),int(<int>(<DBTINYINT *>data)[7]),int(<int>(<DBTINYINT *>data)[8]),int(<int>(<DBTINYINT *>data)[9]),int(<int>(<DBTINYINT *>data)[10]),int(<int>(<DBTINYINT *>data)[11]),int(<int>(<DBTINYINT *>data)[12]),int(<int>(<DBTINYINT *>data)[13]),int(<int>(<DBTINYINT *>data)[14]),int(<int>(<DBTINYINT *>data)[15])))
+            #if dbtype == SQLDATETIME2:
+            #    dbanydatecrack(self.dbproc, &di, <DBDATETIME *><BYTE *>&dt)
+            #else
             dbdatecrack(self.dbproc, &di, <DBDATETIME *><BYTE *>&dt)
-			IF PYMSSQL_DEBUG == 1:
-				sys.stderr.write("convert_db_value datetime: year = %d; month = %d; day = %d; hour = %d; min = %d; sec = %d; milli = %d\n" % (di.year, di.month, di.day, di.hour, di.minute, di.second, di.millisecond))
+            IF PYMSSQL_DEBUG == 1:
+                sys.stderr.write("convert_db_value datetime: year = %d; month = %d; day = %d; hour = %d; min = %d; sec = %d; milli = %d\n" % (di.year, di.month, di.day, di.hour, di.minute, di.second, di.millisecond))
             return datetime.datetime(di.year, di.month, di.day,
                 di.hour, di.minute, di.second, di.millisecond * 1000)
 

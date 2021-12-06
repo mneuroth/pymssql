@@ -896,7 +896,7 @@ cdef class MSSQLConnection:
                 di.hour = 23
                 di.minute = 59
                 di.second = 59
-                di.microsecond = 999
+                di.millisecond = 999
             IF PYMSSQL_DEBUG == 1:
                 sys.stderr.write("convert_db_value datetime: year = %d; month = %d; day = %d; hour = %d; min = %d; sec = %d; milli = %d\n" % (di.year, di.month, di.day, di.hour, di.minute, di.second, di.millisecond))
             return datetime.datetime(di.year, di.month, di.day,
